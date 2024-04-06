@@ -1,10 +1,3 @@
-//
-//  View.swift
-//  swift-authentication
-//
-//  Created by Elkin Garcia on 4/3/24.
-//
-
 import SwiftUI
 
 struct LoginView: View {
@@ -13,17 +6,19 @@ struct LoginView: View {
     @State private var textFieldWidth: CGFloat = 0
     @State private var textFieldHeight: CGFloat = 0
     @State private var isSecureTextEntry = true
-
+    
     
     var body: some View {
         ZStack{
             VStack {
                 // Logo Image
-                Image("Logo") // Replace "YourLogoImage" with the name of your logo image asset
+                Image("Logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 200)
+                    .accessibility(hidden: true) // Hide logo from accessibility
                 
+                // Email TextField
                 TextField("Email", text: $viewModel.email)
                     .padding()
                     .background(Color(UIColor.systemGray6))
@@ -37,12 +32,15 @@ struct LoginView: View {
                         }
                     )
                     .padding(.bottom, 20)
+                    .accessibility(label: Text("Email")) // Set accessibility label
                 
                 // Password SecureField with visibility toggle
                 HStack {
                     if isSecureTextEntry {
                         SecureField("Password", text: $viewModel.password)
                             .padding()
+                            .accessibility(label: Text("Password")) // Set accessibility label
+                            .accessibility(hint: Text("Enter your password")) // Set accessibility hint
                     } else {
                         TextField("Password", text: $viewModel.password)
                             .padding()
@@ -53,12 +51,17 @@ struct LoginView: View {
                         Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
                             .foregroundColor(.primary)
                             .padding(.trailing)
+                            .accessibility(label: Text("Password")) // Set accessibility label
+                            .accessibility(hint: Text("Enter your password")) // Set accessibility hint
                     }
                 }
                 .background(Color(UIColor.systemGray6))
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
+                .accessibility(label: Text("Password")) // Set accessibility label
                 
+                
+                // Login Button
                 Button(action: {
                     // Handle login action
                     self.viewModel.login()
@@ -74,7 +77,9 @@ struct LoginView: View {
                     Alert(title: Text("Error"), message: Text("Invalid credentials"), dismissButton: .default(Text("OK")))
                 }
                 
+                // Forgot Password Button
                 Button(action: {
+                    // Handle forgot password action
                 }) {
                     Text("Forgot Password?")
                         .foregroundColor(.black)
@@ -85,10 +90,12 @@ struct LoginView: View {
                 
                 Spacer()
                 
+                // Sign Up Text
                 HStack(alignment: .center){
                     Text("Don't have an account?").foregroundColor(Color("SecondaryOne"))
                     
                     Button(action: {
+                        // Handle sign up action
                     }) {
                         Text("Sign Up")
                             .fontWeight(.bold)
