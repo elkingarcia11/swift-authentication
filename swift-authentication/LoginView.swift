@@ -11,6 +11,8 @@ struct LoginView: View {
     // State to control presentation of Forgot Password sheet
     @State private var isForgotPasswordSheetPresented = false
     
+    // State to control presentation of Sign Up sheet
+    @State private var isSignUpSheetPresented = false
     var body: some View {
         ZStack{
             VStack {
@@ -102,12 +104,17 @@ struct LoginView: View {
                     Text("Don't have an account?").foregroundColor(Color("SecondaryOne"))
                     
                     Button(action: {
-                        // Handle sign up action
+                        // Show sign-up sheet
+                        self.isSignUpSheetPresented.toggle()
                     }) {
                         Text("Sign Up")
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                             .cornerRadius(globalCornerRadius)
+                    }
+                    .sheet(isPresented: $isSignUpSheetPresented) {
+                        // Present SignUpView when isSignUpSheetPresented is true
+                        SignUpView()
                     }
                 }
                 
