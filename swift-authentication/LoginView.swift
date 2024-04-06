@@ -8,6 +8,9 @@ struct LoginView: View {
     @State private var isSecureTextEntry = true
     
     
+    // State to control presentation of Forgot Password sheet
+    @State private var isForgotPasswordSheetPresented = false
+    
     var body: some View {
         ZStack{
             VStack {
@@ -22,7 +25,7 @@ struct LoginView: View {
                 TextField("Email", text: $viewModel.email)
                     .padding()
                     .background(Color(UIColor.systemGray6))
-                    .cornerRadius(5.0)
+                    .cornerRadius(globalCornerRadius)
                     .overlay(
                         GeometryReader { geometry in
                             Color.clear.onAppear {
@@ -56,7 +59,7 @@ struct LoginView: View {
                     }
                 }
                 .background(Color(UIColor.systemGray6))
-                .cornerRadius(5.0)
+                .cornerRadius(globalCornerRadius)
                 .padding(.bottom, 20)
                 .accessibility(label: Text("Password")) // Set accessibility label
                 
@@ -71,7 +74,7 @@ struct LoginView: View {
                         .padding()
                         .frame(width: textFieldWidth, height: textFieldHeight)
                         .background(Color("Primary"))
-                        .cornerRadius(5.0)
+                        .cornerRadius(globalCornerRadius)
                 }
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(title: Text("Error"), message: Text("Invalid credentials"), dismissButton: .default(Text("OK")))
@@ -79,13 +82,17 @@ struct LoginView: View {
                 
                 // Forgot Password Button
                 Button(action: {
-                    // Handle forgot password action
+                    // Show Forgot Password sheet
+                    self.isForgotPasswordSheetPresented.toggle()
                 }) {
                     Text("Forgot Password?")
                         .foregroundColor(.black)
                         .padding()
-                        .frame(width: textFieldWidth, height: textFieldHeight)
-                        .cornerRadius(5.0)
+                        .cornerRadius(globalCornerRadius)
+                }
+                .sheet(isPresented: $isForgotPasswordSheetPresented) {
+                    // Present Forgot Password sheet
+                    ForgotPasswordView()
                 }
                 
                 Spacer()
@@ -100,10 +107,9 @@ struct LoginView: View {
                         Text("Sign Up")
                             .fontWeight(.bold)
                             .foregroundColor(.black)
-                            .cornerRadius(5.0)
+                            .cornerRadius(globalCornerRadius)
                     }
                 }
-                .frame(width: textFieldWidth, height: textFieldHeight)
                 
             }
             .padding()
