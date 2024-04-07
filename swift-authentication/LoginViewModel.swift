@@ -1,13 +1,27 @@
 import Foundation
 
 class LoginViewModel: ObservableObject {
+    @Published var showAlert = false
+    
     @Published var email: String = ""
     @Published var password: String = ""
-    
     @Published var emailError: String = ""
     @Published var passwordError: String = ""
     
-    @Published var showAlert = false
+    // State to control presentation of Forgot Password sheet
+    @Published var isForgotPasswordSheetPresented = false
+    
+    // State to control presentation of Sign Up sheet
+    @Published var isSignUpSheetPresented = false
+    
+    
+    @Published var isSecureTextEntry = true
+    
+    // Accessibility labels and hints
+    let emailAccessibilityLabel = "Email"
+    let emailAccessibilityHint = "Enter your email"
+    let passwordAccessibilityLabel = "Password"
+    let passwordAccessibilityHint = "Enter your password"
     
     func login() {
         if isValidEmail(email) && isValidPassword(password){
@@ -54,6 +68,7 @@ class LoginViewModel: ObservableObject {
         if uppercaseLetterTest.evaluate(with: password) {
             if lowercaseLetterTest.evaluate(with: password) {
                 if numberTest.evaluate(with: password) {
+                    passwordError = ""
                     return true
                 } else {
                     passwordError = "Password needs at least one number"
@@ -67,5 +82,14 @@ class LoginViewModel: ObservableObject {
             passwordError = "Password needs at least one uppercase letter"
             return false
         }
+    }
+    
+    // Functions to toggle the presentation states
+    func toggleForgotPasswordSheet() {
+        isForgotPasswordSheetPresented.toggle()
+    }
+    
+    func toggleSignUpSheet() {
+        isSignUpSheetPresented.toggle()
     }
 }
