@@ -16,14 +16,7 @@
 		1EB64FF72BBDEAA40092D7F9 /* swift_authenticationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB64FF62BBDEAA40092D7F9 /* swift_authenticationUITests.swift */; };
 		1EB64FF92BBDEAA40092D7F9 /* swift_authenticationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB64FF82BBDEAA40092D7F9 /* swift_authenticationUITestsLaunchTests.swift */; };
 		1EB650062BBDEAE70092D7F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650052BBDEAE70092D7F9 /* LoginViewModel.swift */; };
-		1EB650072BBDEAE70092D7F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650052BBDEAE70092D7F9 /* LoginViewModel.swift */; };
-		1EB650082BBDEAE70092D7F9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650052BBDEAE70092D7F9 /* LoginViewModel.swift */; };
 		1EB6500A2BBDEAF40092D7F9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650092BBDEAF40092D7F9 /* LoginView.swift */; };
-		1EB6500B2BBDEAF40092D7F9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650092BBDEAF40092D7F9 /* LoginView.swift */; };
-		1EB6500C2BBDEAF40092D7F9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650092BBDEAF40092D7F9 /* LoginView.swift */; };
-		1EB6500E2BBDEAFF0092D7F9 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB6500D2BBDEAFF0092D7F9 /* LoginModel.swift */; };
-		1EB6500F2BBDEAFF0092D7F9 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB6500D2BBDEAFF0092D7F9 /* LoginModel.swift */; };
-		1EB650102BBDEAFF0092D7F9 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB6500D2BBDEAFF0092D7F9 /* LoginModel.swift */; };
 		1EB650122BC1F4B60092D7F9 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650112BC1F4B60092D7F9 /* ForgotPasswordView.swift */; };
 		1EB650142BC204AB0092D7F9 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650132BC204AB0092D7F9 /* GlobalConstants.swift */; };
 		1EB650162BC20D7F0092D7F9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB650152BC20D7F0092D7F9 /* SignUpView.swift */; };
@@ -62,7 +55,6 @@
 		1EB64FF82BBDEAA40092D7F9 /* swift_authenticationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swift_authenticationUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1EB650052BBDEAE70092D7F9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1EB650092BBDEAF40092D7F9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		1EB6500D2BBDEAFF0092D7F9 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		1EB650112BC1F4B60092D7F9 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		1EB650132BC204AB0092D7F9 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		1EB650152BC20D7F0092D7F9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -118,9 +110,9 @@
 		1EB64FD52BBDEAA30092D7F9 /* swift-authentication */ = {
 			isa = PBXGroup;
 			children = (
-				1EB6501D2BC230ED0092D7F9 /* ForgotPasswordView */,
-				1EB6501C2BC230E80092D7F9 /* SignUpView */,
-				1EB6501B2BC230D60092D7F9 /* LoginView */,
+				1EB650222BC23BB00092D7F9 /* Models */,
+				1EB650212BC23BAC0092D7F9 /* ViewModels */,
+				1EB650202BC23BA50092D7F9 /* Views */,
 				1EB64FD62BBDEAA30092D7F9 /* swift_authenticationApp.swift */,
 				1EB64FDA2BBDEAA40092D7F9 /* Assets.xcassets */,
 				1EB64FDF2BBDEAA40092D7F9 /* Persistence.swift */,
@@ -156,32 +148,32 @@
 			path = "swift-authenticationUITests";
 			sourceTree = "<group>";
 		};
-		1EB6501B2BC230D60092D7F9 /* LoginView */ = {
-			isa = PBXGroup;
-			children = (
-				1EB650092BBDEAF40092D7F9 /* LoginView.swift */,
-				1EB6500D2BBDEAFF0092D7F9 /* LoginModel.swift */,
-				1EB650052BBDEAE70092D7F9 /* LoginViewModel.swift */,
-			);
-			path = LoginView;
-			sourceTree = "<group>";
-		};
-		1EB6501C2BC230E80092D7F9 /* SignUpView */ = {
+		1EB650202BC23BA50092D7F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				1EB650152BC20D7F0092D7F9 /* SignUpView.swift */,
-				1EB6501E2BC2337F0092D7F9 /* SignUpViewModel.swift */,
+				1EB650092BBDEAF40092D7F9 /* LoginView.swift */,
+				1EB650112BC1F4B60092D7F9 /* ForgotPasswordView.swift */,
 			);
-			path = SignUpView;
+			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
-		1EB6501D2BC230ED0092D7F9 /* ForgotPasswordView */ = {
+		1EB650212BC23BAC0092D7F9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				1EB650192BC230240092D7F9 /* ForgotPasswordViewModel.swift */,
-				1EB650112BC1F4B60092D7F9 /* ForgotPasswordView.swift */,
+				1EB6501E2BC2337F0092D7F9 /* SignUpViewModel.swift */,
+				1EB650052BBDEAE70092D7F9 /* LoginViewModel.swift */,
 			);
-			path = ForgotPasswordView;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1EB650222BC23BB00092D7F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,7 +306,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EB6500E2BBDEAFF0092D7F9 /* LoginModel.swift in Sources */,
 				1EB650122BC1F4B60092D7F9 /* ForgotPasswordView.swift in Sources */,
 				1EB650062BBDEAE70092D7F9 /* LoginViewModel.swift in Sources */,
 				1EB64FE02BBDEAA40092D7F9 /* Persistence.swift in Sources */,
@@ -332,10 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EB650072BBDEAE70092D7F9 /* LoginViewModel.swift in Sources */,
 				1EB64FED2BBDEAA40092D7F9 /* swift_authenticationTests.swift in Sources */,
-				1EB6500B2BBDEAF40092D7F9 /* LoginView.swift in Sources */,
-				1EB6500F2BBDEAFF0092D7F9 /* LoginModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EB650102BBDEAFF0092D7F9 /* LoginModel.swift in Sources */,
-				1EB6500C2BBDEAF40092D7F9 /* LoginView.swift in Sources */,
 				1EB64FF92BBDEAA40092D7F9 /* swift_authenticationUITestsLaunchTests.swift in Sources */,
-				1EB650082BBDEAE70092D7F9 /* LoginViewModel.swift in Sources */,
 				1EB64FF72BBDEAA40092D7F9 /* swift_authenticationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
