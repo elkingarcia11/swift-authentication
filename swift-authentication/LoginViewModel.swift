@@ -3,10 +3,14 @@ import Foundation
 class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
+    
+    @Published var emailError: String = ""
+    @Published var passwordError: String = ""
+    
     @Published var showAlert = false
     
     func login() {
-        if isValidEmail(email) and isValidPassword(password){
+        if isValidEmail(email) && isValidPassword(password){
             print("Email and password successful")
         } else{
             // Handle failed login
@@ -19,7 +23,12 @@ class LoginViewModel: ObservableObject {
         // Return true if valid, false otherwise
         let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
+        if emailPredicate.evaluate(with: email) {
+            emailError = ""
+            return true
+        }
+        emailError = "Email is invalid"
+        return false
     }
     
     private func isValidPassword(_ password: String) -> Bool {
@@ -28,7 +37,7 @@ class LoginViewModel: ObservableObject {
         
         // Minimum length requirement (change as needed)
         guard password.count >= 8 else {
-            print("Password needs to be at least 8 characters")
+            passwordError = "Password needs to be at least 8 characters"
             return false
         }
         
@@ -47,15 +56,16 @@ class LoginViewModel: ObservableObject {
                 if numberTest.evaluate(with: password) {
                     return true
                 } else {
-                    print("Password needs at least one number")
+                    passwordError = "Password needs at least one number"
+                    return false
                 }
             } else{
-                print("Password needs at least one lowercase letter")
+                passwordError = "Password needs at least one lowercase letter"
+                return false
             }
         } else {
-            print("Password needs at least one uppercase letter")
+            passwordError = "Password needs at least one uppercase letter"
+            return false
         }
-        
-        return false
     }
 }

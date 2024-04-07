@@ -5,7 +5,8 @@ struct SignUpView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
-    @State private var isSecureTextEntry = true
+    @State private var isSecurePasswordEntry = true
+    @State private var isSecureConfirmPasswordEntry = true
     
     @State private var textFieldWidth: CGFloat = 0
     @State private var textFieldHeight: CGFloat = 0
@@ -33,7 +34,7 @@ struct SignUpView: View {
             
             // Password SecureField with visibility toggle
             HStack {
-                if isSecureTextEntry {
+                if isSecurePasswordEntry {
                     SecureField("Password", text: $password)
                         .padding()
                         .accessibility(label: Text("Password")) // Set accessibility label
@@ -43,9 +44,9 @@ struct SignUpView: View {
                         .padding()
                 }
                 Button(action: {
-                    isSecureTextEntry.toggle()
+                    isSecurePasswordEntry.toggle()
                 }) {
-                    Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
+                    Image(systemName: isSecurePasswordEntry ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.primary)
                         .padding(.trailing)
                         .accessibility(label: Text("Password")) // Set accessibility label
@@ -59,7 +60,7 @@ struct SignUpView: View {
             
             // Password SecureField with visibility toggle
             HStack {
-                if isSecureTextEntry {
+                if isSecureConfirmPasswordEntry {
                     SecureField("Confirm Password", text: $confirmPassword)
                         .padding()
                         .accessibility(label: Text("Confirm Password")) // Set accessibility label
@@ -69,9 +70,9 @@ struct SignUpView: View {
                         .padding()
                 }
                 Button(action: {
-                    isSecureTextEntry.toggle()
+                    isSecureConfirmPasswordEntry.toggle()
                 }) {
-                    Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
+                    Image(systemName: isSecureConfirmPasswordEntry ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.primary)
                         .padding(.trailing)
                         .accessibility(label: Text("Password")) // Set accessibility label

@@ -5,14 +5,14 @@ struct LoginView: View {
     
     @State private var textFieldWidth: CGFloat = 0
     @State private var textFieldHeight: CGFloat = 0
+    
+    // State to control visiblity of password
     @State private var isSecureTextEntry = true
-    
-    
     // State to control presentation of Forgot Password sheet
     @State private var isForgotPasswordSheetPresented = false
-    
     // State to control presentation of Sign Up sheet
     @State private var isSignUpSheetPresented = false
+    
     var body: some View {
         ZStack{
             VStack {
@@ -23,49 +23,73 @@ struct LoginView: View {
                     .frame(width: 200, height: 200)
                     .accessibility(hidden: true) // Hide logo from accessibility
                 
-                // Email TextField
-                TextField("Email", text: $viewModel.email)
-                    .padding()
+                VStack(alignment: .leading){
+                    // Email TextField
+                    TextField("Email", text: $viewModel.email)
+                        .padding()
+                        .background(Color(UIColor.systemGray6))
+                        .cornerRadius(globalCornerRadius)
+                        .overlay(
+                            GeometryReader { geometry in
+                                Color.clear.onAppear {
+                                    self.textFieldWidth = geometry.size.width
+                                    self.textFieldHeight = geometry.size.height
+                                }
+                            }
+                        )
+                        .padding(.bottom, viewModel.emailError.isEmpty ? 20 : 0)
+                        .accessibility(label: Text("Email")) // Set accessibility label
+                    
+                    if !viewModel.emailError.isEmpty {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.red)
+                                .padding([.top, .trailing], 5)
+                            Text(viewModel.emailError)
+                                .foregroundColor(.red)
+                        }
+                        .padding(.bottom, 20)
+                    }
+                    
+                    
+                    // Password SecureField with visibility toggle
+                    HStack {
+                        if isSecureTextEntry {
+                            SecureField("Password", text: $viewModel.password)
+                                .padding()
+                                .accessibility(label: Text("Password")) // Set accessibility label
+                                .accessibility(hint: Text("Enter your password")) // Set accessibility hint
+                        } else {
+                            TextField("Password", text: $viewModel.password)
+                                .padding()
+                        }
+                        Button(action: {
+                            isSecureTextEntry.toggle()
+                        }) {
+                            Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
+                                .foregroundColor(.primary)
+                                .padding(.trailing)
+                                .accessibility(label: Text("Password")) // Set accessibility label
+                                .accessibility(hint: Text("Enter your password")) // Set accessibility hint
+                        }
+                    }
                     .background(Color(UIColor.systemGray6))
                     .cornerRadius(globalCornerRadius)
-                    .overlay(
-                        GeometryReader { geometry in
-                            Color.clear.onAppear {
-                                self.textFieldWidth = geometry.size.width
-                                self.textFieldHeight = geometry.size.height
-                            }
+                    .padding(.bottom, viewModel.passwordError.isEmpty ? 20 : 0)
+                    .accessibility(label: Text("Password")) // Set accessibility label
+                    
+                    if !viewModel.passwordError.isEmpty {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.red)
+                                .padding([.top, .trailing], 5)
+                            Text(viewModel.passwordError)
+                                .foregroundColor(.red)
                         }
-                    )
-                    .padding(.bottom, 20)
-                    .accessibility(label: Text("Email")) // Set accessibility label
-                
-                // Password SecureField with visibility toggle
-                HStack {
-                    if isSecureTextEntry {
-                        SecureField("Password", text: $viewModel.password)
-                            .padding()
-                            .accessibility(label: Text("Password")) // Set accessibility label
-                            .accessibility(hint: Text("Enter your password")) // Set accessibility hint
-                    } else {
-                        TextField("Password", text: $viewModel.password)
-                            .padding()
+                        .padding(.bottom, 20)
                     }
-                    Button(action: {
-                        isSecureTextEntry.toggle()
-                    }) {
-                        Image(systemName: isSecureTextEntry ? "eye.slash.fill" : "eye.fill")
-                            .foregroundColor(.primary)
-                            .padding(.trailing)
-                            .accessibility(label: Text("Password")) // Set accessibility label
-                            .accessibility(hint: Text("Enter your password")) // Set accessibility hint
-                    }
+                    
                 }
-                .background(Color(UIColor.systemGray6))
-                .cornerRadius(globalCornerRadius)
-                .padding(.bottom, 20)
-                .accessibility(label: Text("Password")) // Set accessibility label
-                
-                
                 // Login Button
                 Button(action: {
                     // Handle login action
