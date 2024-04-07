@@ -20,7 +20,7 @@ struct LoginView: View {
                     .frame(width: 200, height: 200)
                     .accessibility(hidden: true) // Hide logo from accessibility
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading){
                     // Email TextField
                     TextField("Email", text: $viewModel.email)
                         .padding()
@@ -34,31 +34,30 @@ struct LoginView: View {
                                 }
                             }
                         )
-                        .padding(.bottom, viewModel.emailError.isEmpty ? 20 : 0)
+                        .padding(.bottom, viewModel.isEmailValid ? 20 : 0)
                         .accessibility(label: Text(viewModel.emailAccessibilityLabel))
                         .accessibility(hint: Text(viewModel.emailAccessibilityHint))
                     
-                    if !viewModel.emailError.isEmpty {
+                    if !viewModel.isEmailValid {
                         ErrorView(error: viewModel.emailError)
                     }
                     
                     // Password SecureField with visibility toggle
                     PasswordField(isSecureTextEntry: $viewModel.isSecureTextEntry, password: $viewModel.password)
-                        .padding(.bottom, viewModel.passwordError.isEmpty ? 20 : 0)
+                        .padding(.bottom, viewModel.isPasswordValid ? 20 : 0)
                         .accessibility(label: Text("Password")) // Set accessibility label
                     
-                    if !viewModel.passwordError.isEmpty {
+                    if !viewModel.isPasswordValid {
                         ErrorView(error: viewModel.passwordError)
                     }
                     
-                    // Login Button
-                    LoginButton(textFieldWidth: $textFieldWidth, textFieldHeight: $textFieldHeight, viewModel: viewModel)
-                        .alert(isPresented: $viewModel.showAlert) {
-                            Alert(title: Text("Error"), message: Text("Invalid credentials"), dismissButton: .default(Text("OK")))
-                        }
-           
+                    
                 }
-                .padding()
+                // Login Button
+                LoginButton(textFieldWidth: $textFieldWidth, textFieldHeight: $textFieldHeight, viewModel: viewModel)
+                    .alert(isPresented: $viewModel.showAlert) {
+                        Alert(title: Text("Error"), message: Text("Invalid credentials"), dismissButton: .default(Text("OK")))
+                    }
                 
                 // Forgot Password Button
                 ForgotPasswordButton(viewModel: viewModel)
@@ -67,7 +66,7 @@ struct LoginView: View {
                 
                 // Sign Up Text
                 SignUpText(viewModel: viewModel)
-            }
+            }.padding()
         }
     }
 }
